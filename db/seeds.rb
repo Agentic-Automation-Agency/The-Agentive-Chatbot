@@ -2,14 +2,15 @@
 GlobalConfig.clear_cache
 ConfigLoader.new.process
 
-## Seeds productions
-if Rails.env.production?
-  # Setup Onboarding flow
+## Setup Onboarding flow
+if Rails.env.production? || (Rails.env.development? && ENV['ENABLE_ACCOUNT_SIGNUP'] == 'true')
   Redis::Alfred.set(Redis::Alfred::CHATWOOT_INSTALLATION_ONBOARDING, true)
 end
 
-## Seeds for Local Development
-unless Rails.env.production?
+## Seeds for Local Development (sample data)
+## To disable these in dev (and see first-time onboarding instead of login),
+## set CW_SKIP_DEV_SEEDS=true in your environment.
+unless Rails.env.production? || ENV['CW_SKIP_DEV_SEEDS'] == 'true'
 
   # Enables creating additional accounts from dashboard
   installation_config = InstallationConfig.find_by(name: 'CREATE_NEW_ACCOUNT_FROM_DASHBOARD')
