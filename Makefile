@@ -1,5 +1,5 @@
 # Variables
-APP_NAME := chatwoot
+APP_NAME := The-Agentive
 RAILS_ENV ?= development
 
 # Targets

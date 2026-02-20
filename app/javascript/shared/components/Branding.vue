@@ -1,11 +1,11 @@
 <script>
 import { useBranding } from 'shared/composables/useBranding';
 
-const {
-  LOGO_THUMBNAIL: logoThumbnail,
-  BRAND_NAME: brandName,
-  WIDGET_BRAND_URL: widgetBrandURL,
-} = window.globalConfig || {};
+// Mapping Environment Variables
+const BRAND_NAME = import.meta.env.VITE_BRAND_NAME || '';
+const LOGO_THUMBNAIL = import.meta.env.VITE_BRAND_LOGO_THUMBNAIL || '';
+const WIDGET_BRAND_URL = import.meta.env.VITE_BRAND_URL || '';
+const POWERED_BY_TEXT = import.meta.env.VITE_BRAND_POWERED_BY || 'Powered by';
 
 export default {
   props: {
@@ -18,22 +18,22 @@ export default {
     const { replaceInstallationName } = useBranding();
     return {
       replaceInstallationName,
-    };
-  },
-  data() {
-    return {
-      globalConfig: {
-        brandName,
-        logoThumbnail,
-        widgetBrandURL,
-      },
+      // Expose variables to the template
+      BRAND_NAME,
+      LOGO_THUMBNAIL,
+      POWERED_BY_TEXT,
     };
   },
   computed: {
     brandRedirectURL() {
+      // Use the URL defined in the env file
+      const baseUrl = WIDGET_BRAND_URL;
+      if (!baseUrl) return '';
+
       try {
         const referrerHost = this.$store.getters['appConfig/getReferrerHost'];
-        const url = new URL(this.globalConfig.widgetBrandURL);
+        const url = new URL(baseUrl);
+
         if (referrerHost) {
           url.searchParams.set('utm_source', referrerHost);
           url.searchParams.set('utm_medium', 'widget');
@@ -41,19 +41,21 @@ export default {
           url.searchParams.set('utm_medium', 'survey');
         }
         url.searchParams.set('utm_campaign', 'branding');
+
         return url.toString();
       } catch (e) {
-        // Suppressing the error as getter is not defined in some cases
+        // Fallback to base URL if URL parsing fails or store is missing
+        return baseUrl;
       }
-      return '';
     },
   },
 };
 </script>
 
 <template>
+  <!-- Use BRAND_NAME from env -->
   <div
-    v-if="globalConfig.brandName && !disableBranding"
+    v-if="BRAND_NAME && !disableBranding"
     class="px-0 py-3 flex justify-center"
   >
     <a
@@ -64,11 +66,12 @@ export default {
     >
       <img
         class="ltr:mr-1 rtl:ml-1 max-w-3 max-h-3"
-        :alt="globalConfig.brandName"
-        :src="globalConfig.logoThumbnail"
+        :alt="BRAND_NAME"
+        :src="LOGO_THUMBNAIL"
       />
       <span>
-        {{ replaceInstallationName($t('POWERED_BY')) }}
+        <!-- Use POWERED_BY_TEXT from env -->
+        {{ replaceInstallationName(POWERED_BY_TEXT) }}
       </span>
     </a>
   </div>

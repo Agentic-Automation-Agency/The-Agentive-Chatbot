@@ -3,8 +3,11 @@ GlobalConfig.clear_cache
 ConfigLoader.new.process
 
 ## Setup Onboarding flow
-if Rails.env.production? || (Rails.env.development? && ENV['ENABLE_ACCOUNT_SIGNUP'] == 'true')
+# Setup Onboarding flow
+if User.count.zero?
   Redis::Alfred.set(Redis::Alfred::CHATWOOT_INSTALLATION_ONBOARDING, true)
+else
+  Redis::Alfred.set(Redis::Alfred::CHATWOOT_INSTALLATION_ONBOARDING, false)
 end
 
 ## Seeds for Local Development (sample data)
