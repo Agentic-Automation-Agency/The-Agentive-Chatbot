@@ -19,6 +19,14 @@ export default {
       default: false,
     },
   },
+  computed: {
+    // Logic to check for an ENV override
+    displayTitle() {
+      // If VITE_ONBOARDING_TITLE exists in .env, it uses that.
+      // Otherwise, it uses the 'title' prop passed from the parent component.
+      return import.meta.env.VITE_ONBOARDING_TITLE || this.title;
+    }
+  }
 };
 </script>
 
@@ -43,7 +51,8 @@ export default {
       <fluent-icon v-else size="20" :icon="icon" />
     </div>
     <span>
-      {{ title }}
+      <!-- UPDATED: Use displayTitle instead of title -->
+      {{ displayTitle }}
     </span>
   </div>
 </template>
