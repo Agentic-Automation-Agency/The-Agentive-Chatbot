@@ -91,7 +91,7 @@ onBeforeMount(() => {
       <BaseSettingsHeader
         :title="$t('LABEL_MGMT.HEADER')"
         :description="$t('LABEL_MGMT.DESCRIPTION')"
-        :link-text="$t('LABEL_MGMT.LEARN_MORE')"
+       
         feature-name="labels"
       >
         <template #actions>

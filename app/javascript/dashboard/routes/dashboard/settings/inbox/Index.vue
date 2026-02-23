@@ -82,7 +82,7 @@ const openDelete = inbox => {
       <BaseSettingsHeader
         :title="$t('INBOX_MGMT.HEADER')"
         :description="$t('INBOX_MGMT.DESCRIPTION')"
-        :link-text="$t('INBOX_MGMT.LEARN_MORE')"
+   
         feature-name="inboxes"
       >
         <template #actions>

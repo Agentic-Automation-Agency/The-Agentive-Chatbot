@@ -386,69 +386,69 @@ const menuItems = computed(() => {
     //     },
     //   ],
     // },
-    {
-      name: 'Contacts',
-      label: t('SIDEBAR.CONTACTS'),
-      icon: 'i-lucide-contact',
-      children: [
-        {
-          name: 'All Contacts',
-          label: t('SIDEBAR.ALL_CONTACTS'),
-          to: accountScopedRoute(
-            'contacts_dashboard_index',
-            {},
-            { page: 1, search: undefined }
-          ),
-          activeOn: ['contacts_dashboard_index', 'contacts_edit'],
-        },
-        {
-          name: 'Active',
-          label: t('SIDEBAR.ACTIVE'),
-          to: accountScopedRoute('contacts_dashboard_active'),
-          activeOn: ['contacts_dashboard_active'],
-        },
-        {
-          name: 'Segments',
-          icon: 'i-lucide-group',
-          label: t('SIDEBAR.CUSTOM_VIEWS_SEGMENTS'),
-          children: contactCustomViews.value.map(view => ({
-            name: `${view.name}-${view.id}`,
-            label: view.name,
-            to: accountScopedRoute(
-              'contacts_dashboard_segments_index',
-              { segmentId: view.id },
-              { page: 1 }
-            ),
-            activeOn: [
-              'contacts_dashboard_segments_index',
-              'contacts_edit_segment',
-            ],
-          })),
-        },
-        {
-          name: 'Tagged With',
-          icon: 'i-lucide-tag',
-          label: t('SIDEBAR.TAGGED_WITH'),
-          children: labels.value.map(label => ({
-            name: `${label.title}-${label.id}`,
-            label: label.title,
-            icon: h('span', {
-              class: `size-[8px] rounded-sm`,
-              style: { backgroundColor: label.color },
-            }),
-            to: accountScopedRoute(
-              'contacts_dashboard_labels_index',
-              { label: label.title },
-              { page: 1, search: undefined }
-            ),
-            activeOn: [
-              'contacts_dashboard_labels_index',
-              'contacts_edit_label',
-            ],
-          })),
-        },
-      ],
-    },
+    // {
+    //   name: 'Contacts',
+    //   label: t('SIDEBAR.CONTACTS'),
+    //   icon: 'i-lucide-contact',
+    //   children: [
+    //     {
+    //       name: 'All Contacts',
+    //       label: t('SIDEBAR.ALL_CONTACTS'),
+    //       to: accountScopedRoute(
+    //         'contacts_dashboard_index',
+    //         {},
+    //         { page: 1, search: undefined }
+    //       ),
+    //       activeOn: ['contacts_dashboard_index', 'contacts_edit'],
+    //     },
+    //     {
+    //       name: 'Active',
+    //       label: t('SIDEBAR.ACTIVE'),
+    //       to: accountScopedRoute('contacts_dashboard_active'),
+    //       activeOn: ['contacts_dashboard_active'],
+    //     },
+    //     {
+    //       name: 'Segments',
+    //       icon: 'i-lucide-group',
+    //       label: t('SIDEBAR.CUSTOM_VIEWS_SEGMENTS'),
+    //       children: contactCustomViews.value.map(view => ({
+    //         name: `${view.name}-${view.id}`,
+    //         label: view.name,
+    //         to: accountScopedRoute(
+    //           'contacts_dashboard_segments_index',
+    //           { segmentId: view.id },
+    //           { page: 1 }
+    //         ),
+    //         activeOn: [
+    //           'contacts_dashboard_segments_index',
+    //           'contacts_edit_segment',
+    //         ],
+    //       })),
+    //     },
+    //     {
+    //       name: 'Tagged With',
+    //       icon: 'i-lucide-tag',
+    //       label: t('SIDEBAR.TAGGED_WITH'),
+    //       children: labels.value.map(label => ({
+    //         name: `${label.title}-${label.id}`,
+    //         label: label.title,
+    //         icon: h('span', {
+    //           class: `size-[8px] rounded-sm`,
+    //           style: { backgroundColor: label.color },
+    //         }),
+    //         to: accountScopedRoute(
+    //           'contacts_dashboard_labels_index',
+    //           { label: label.title },
+    //           { page: 1, search: undefined }
+    //         ),
+    //         activeOn: [
+    //           'contacts_dashboard_labels_index',
+    //           'contacts_edit_label',
+    //         ],
+    //       })),
+    //     },
+    //   ],
+    // },
     {
       name: 'Companies',
       label: t('SIDEBAR.COMPANIES'),
@@ -619,36 +619,36 @@ const menuItems = computed(() => {
           icon: 'i-lucide-tags',
           to: accountScopedRoute('labels_list'),
         },
-        {
-          name: 'Settings Custom Attributes',
-          label: t('SIDEBAR.CUSTOM_ATTRIBUTES'),
-          icon: 'i-lucide-code',
-          to: accountScopedRoute('attributes_list'),
-        },
-        {
-          name: 'Settings Automation',
-          label: t('SIDEBAR.AUTOMATION'),
-          icon: 'i-lucide-repeat',
-          to: accountScopedRoute('automation_list'),
-        },
+        // {
+        //   name: 'Settings Custom Attributes',
+        //   label: t('SIDEBAR.CUSTOM_ATTRIBUTES'),
+        //   icon: 'i-lucide-code',
+        //   to: accountScopedRoute('attributes_list'),
+        // },
+        // {
+        //   name: 'Settings Automation',
+        //   label: t('SIDEBAR.AUTOMATION'),
+        //   icon: 'i-lucide-repeat',
+        //   to: accountScopedRoute('automation_list'),
+        // },
         {
           name: 'Settings Agent Bots',
           label: t('SIDEBAR.AGENT_BOTS'),
           icon: 'i-lucide-bot',
           to: accountScopedRoute('agent_bots'),
         },
-        {
-          name: 'Settings Macros',
-          label: t('SIDEBAR.MACROS'),
-          icon: 'i-lucide-toy-brick',
-          to: accountScopedRoute('macros_wrapper'),
-        },
-        {
-          name: 'Settings Canned Responses',
-          label: t('SIDEBAR.CANNED_RESPONSES'),
-          icon: 'i-lucide-message-square-quote',
-          to: accountScopedRoute('canned_list'),
-        },
+        // {
+        //   name: 'Settings Macros',
+        //   label: t('SIDEBAR.MACROS'),
+        //   icon: 'i-lucide-toy-brick',
+        //   to: accountScopedRoute('macros_wrapper'),
+        // },
+        // {
+        //   name: 'Settings Canned Responses',
+        //   label: t('SIDEBAR.CANNED_RESPONSES'),
+        //   icon: 'i-lucide-message-square-quote',
+        //   to: accountScopedRoute('canned_list'),
+        // },
         // {
         //   name: 'Settings Integrations',
         //   label: t('SIDEBAR.INTEGRATIONS'),
@@ -661,24 +661,24 @@ const menuItems = computed(() => {
         //   icon: 'i-lucide-briefcase',
         //   to: accountScopedRoute('auditlogs_list'),
         // },
-        {
-          name: 'Settings Custom Roles',
-          label: t('SIDEBAR.CUSTOM_ROLES'),
-          icon: 'i-lucide-shield-plus',
-          to: accountScopedRoute('custom_roles_list'),
-        },
+        // {
+        //   name: 'Settings Custom Roles',
+        //   label: t('SIDEBAR.CUSTOM_ROLES'),
+        //   icon: 'i-lucide-shield-plus',
+        //   to: accountScopedRoute('custom_roles_list'),
+        // },
         // {
         //   name: 'Settings Sla',
         //   label: t('SIDEBAR.SLA'),
         //   icon: 'i-lucide-clock-alert',
         //   to: accountScopedRoute('sla_list'),
         // },
-        {
-          name: 'Conversation Workflow',
-          label: t('SIDEBAR.CONVERSATION_WORKFLOW'),
-          icon: 'i-lucide-workflow',
-          to: accountScopedRoute('conversation_workflow_index'),
-        },
+        // {
+        //   name: 'Conversation Workflow',
+        //   label: t('SIDEBAR.CONVERSATION_WORKFLOW'),
+        //   icon: 'i-lucide-workflow',
+        //   to: accountScopedRoute('conversation_workflow_index'),
+        // },
         // {
         //   name: 'Settings Security',
         //   label: t('SIDEBAR.SECURITY'),
