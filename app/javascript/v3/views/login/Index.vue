@@ -7,7 +7,6 @@ import { required, email } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import { SESSION_STORAGE_KEYS } from 'dashboard/constants/sessionStorage';
 import SessionStorage from 'shared/helpers/sessionStorage';
-import { useBranding } from 'shared/composables/useBranding';
 
 // components
 import SimpleDivider from '../../components/Divider/SimpleDivider.vue';
@@ -45,16 +44,12 @@ export default {
     authError: { type: String, default: '' },
   },
   setup() {
-    const { replaceInstallationName } = useBranding();
     return {
-      replaceInstallationName,
       v$: useVuelidate(),
     };
   },
   data() {
     return {
-      // We need to initialize the component with any
-      // properties that will be used in it
       credentials: {
         email: '',
         password: '',
@@ -72,18 +67,23 @@ export default {
   validations() {
     return {
       credentials: {
-        password: {
-          required,
-        },
-        email: {
-          required,
-          email,
-        },
+        password: { required },
+        email: { required, email },
       },
     };
   },
   computed: {
     ...mapGetters({ globalConfig: 'globalConfig/get' }),
+    
+    // --- ENV OVERRIDES ---
+    brandLogo() {
+      return import.meta.env.VITE_BRAND_LOGO_THUMBNAIL_LARGE;
+    },
+    brandLoginTitle() {
+      return import.meta.env.VITE_LOGIN_TITLE;
+    },
+    // ---------------------
+
     allowedLoginMethods() {
       return window.chatwootConfig.allowedLoginMethods || ['email'];
     },
@@ -106,12 +106,9 @@ export default {
     }
     if (this.authError) {
       const messageKey = ERROR_MESSAGES[this.authError] ?? 'LOGIN.API.UNAUTH';
-      // Use a method to get the translated text to avoid dynamic key warning
       const translatedMessage = this.getTranslatedMessage(messageKey);
       useAlert(translatedMessage);
-      // wait for idle state
       this.requestIdleCallbackPolyfill(() => {
-        // Remove the error query param from the url
         const { query } = this.$route;
         this.$router.replace({ query: { ...query, error: undefined } });
       });
@@ -119,7 +116,6 @@ export default {
   },
   methods: {
     getTranslatedMessage(key) {
-      // Avoid dynamic key warning by handling each case explicitly
       switch (key) {
         case 'LOGIN.OAUTH.NO_ACCOUNT_FOUND':
           return this.$t('LOGIN.OAUTH.NO_ACCOUNT_FOUND');
@@ -130,27 +126,19 @@ export default {
           return this.$t('LOGIN.API.UNAUTH');
       }
     },
-    // TODO: Remove this when Safari gets wider support
-    // Ref: https://caniuse.com/requestidlecallback
-    //
     requestIdleCallbackPolyfill(callback) {
       if (window.requestIdleCallback) {
         window.requestIdleCallback(callback);
       } else {
-        // Fallback for safari
-        // Using a delay of 0 allows the callback to be executed asynchronously
-        // in the next available event loop iteration, similar to requestIdleCallback
         setTimeout(callback, 0);
       }
     },
     showAlertMessage(message) {
-      // Reset loading, current selected agent
       this.loginApi.showLoading = false;
       this.loginApi.message = message;
       useAlert(this.loginApi.message);
     },
     handleImpersonation() {
-      // Detects impersonation mode via URL and sets a session flag to prevent user settings changes during impersonation.
       const urlParams = new URLSearchParams(window.location.search);
       const impersonation = urlParams.get(IMPERSONATION_URL_SEARCH_KEY);
       if (impersonation) {
@@ -162,9 +150,7 @@ export default {
       this.loginApi.showLoading = true;
 
       const credentials = {
-        email: this.email
-          ? decodeURIComponent(this.email)
-          : this.credentials.email,
+        email: this.email ? decodeURIComponent(this.email) : this.credentials.email,
         password: this.credentials.password,
         sso_auth_token: this.ssoAuthToken,
         ssoAccountId: this.ssoAccountId,
@@ -173,26 +159,21 @@ export default {
 
       login(credentials)
         .then(result => {
-          // Check if MFA is required
           if (result?.mfaRequired) {
             this.loginApi.showLoading = false;
             this.mfaRequired = true;
             this.mfaToken = result.mfaToken;
             return;
           }
-
           this.handleImpersonation();
           this.showAlertMessage(this.$t('LOGIN.API.SUCCESS_MESSAGE'));
         })
         .catch(response => {
-          // Reset URL Params if the authentication is invalid
           if (this.email) {
             window.location = '/app/login';
           }
           this.loginApi.hasErrored = true;
-          this.showAlertMessage(
-            response?.message || this.$t('LOGIN.API.UNAUTH')
-          );
+          this.showAlertMessage(response?.message || this.$t('LOGIN.API.UNAUTH'));
         });
     },
     submitFormLogin() {
@@ -200,16 +181,13 @@ export default {
         this.showAlertMessage(this.$t('LOGIN.EMAIL.ERROR'));
         return;
       }
-
       this.submitLogin();
     },
     handleMfaVerified() {
-      // MFA verification successful, continue with login
       this.handleImpersonation();
       window.location = '/app';
     },
     handleMfaCancel() {
-      // User cancelled MFA, reset state
       this.mfaRequired = false;
       this.mfaToken = null;
       this.credentials.password = '';
@@ -223,20 +201,18 @@ export default {
     class="flex flex-col w-full min-h-screen py-20 bg-n-brand/5 dark:bg-n-background sm:px-6 lg:px-8"
   >
     <section class="max-w-5xl mx-auto">
+      <!-- UPDATED: Display logo from ENV -->
       <img
-        :src="globalConfig.logo"
-        :alt="globalConfig.installationName"
-        class="block w-auto h-8 mx-auto dark:hidden"
+        :src="brandLogo"
+        :alt="brandLoginTitle"
+        class="block w-auto h-12 mx-auto"
       />
-      <img
-        v-if="globalConfig.logoDark"
-        :src="globalConfig.logoDark"
-        :alt="globalConfig.installationName"
-        class="hidden w-auto h-8 mx-auto dark:block"
-      />
+      
+      <!-- UPDATED: Display title from ENV -->
       <h2 class="mt-6 text-3xl font-medium text-center text-n-slate-12">
-        {{ replaceInstallationName($t('LOGIN.TITLE')) }}
+        {{ brandLoginTitle }}
       </h2>
+
       <p v-if="showSignupLink" class="mt-3 text-sm text-center text-n-slate-11">
         {{ $t('COMMON.OR') }}
         <router-link to="auth/signup" class="lowercase text-link text-n-brand">
