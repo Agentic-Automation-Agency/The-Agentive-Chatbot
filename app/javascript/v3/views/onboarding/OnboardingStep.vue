@@ -24,7 +24,7 @@ export default {
     displayTitle() {
       // If VITE_ONBOARDING_TITLE exists in .env, it uses that.
       // Otherwise, it uses the 'title' prop passed from the parent component.
-      return import.meta.env.VITE_ONBOARDING_TITLE || this.title;
+      return import.meta.env.VITE_ONBOARDING_TITLE || "Please Sign-up";
     }
   }
 };

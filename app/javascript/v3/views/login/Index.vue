@@ -85,7 +85,7 @@ export default {
     },
     brandLoginTitle() {
       // Returns the ENV title if it exists, otherwise falls back to translated title
-      return import.meta.env.VITE_LOGIN_TITLE || this.replaceInstallationName(this.$t('LOGIN.TITLE'));
+      return import.meta.env.VITE_LOGIN_TITLE || 'Please Login!';
     },
     // ---------------------
 
