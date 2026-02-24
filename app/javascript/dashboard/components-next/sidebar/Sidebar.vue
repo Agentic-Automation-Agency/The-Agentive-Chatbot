@@ -450,6 +450,25 @@ const menuItems = computed(() => {
     //   ],
     // },
     {
+      name: 'Vapi Voice Calls',
+      label: t('SIDEBAR.VAPI.TITLE'),
+      icon: 'i-lucide-phone',
+      children: [
+        {
+          name: 'Call Logs',
+          label: t('SIDEBAR.VAPI.CALL_LOGS'),
+          to: accountScopedRoute('vapi_call_logs'),
+          activeOn: ['vapi_call_logs'],
+        },
+        {
+          name: 'Call Stats',
+          label: t('SIDEBAR.VAPI.CALL_STATS'),
+          to: accountScopedRoute('vapi_call_stats'),
+          activeOn: ['vapi_call_stats'],
+        },
+      ],
+    },
+    {
       name: 'Companies',
       label: t('SIDEBAR.COMPANIES'),
       icon: 'i-lucide-building-2',
