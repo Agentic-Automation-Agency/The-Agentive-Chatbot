@@ -81,7 +81,7 @@ export default {
     // --- ENV OVERRIDES ---
     brandLogo() {
       // Returns the ENV logo if it exists, otherwise falls back to globalConfig logo
-      return import.meta.env.VITE_BRAND_LOGO_THUMBNAIL_LARGE || this.globalConfig.logo;
+      return import.meta.env.VITE_BRAND_LOGO_THUMBNAIL_LARGE;
     },
     brandLoginTitle() {
       // Returns the ENV title if it exists, otherwise falls back to translated title
