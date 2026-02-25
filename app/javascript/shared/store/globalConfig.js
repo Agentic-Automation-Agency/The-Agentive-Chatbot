@@ -1,12 +1,11 @@
 import { parseBoolean } from '@chatwoot/utils';
 import { resolveMaximumFileUploadSize } from 'shared/helpers/FileHelper';
 
+// Technical/System values (Remain as they were)
 const {
   API_CHANNEL_NAME: apiChannelName,
-  API_CHANNEL_THUMBNAIL: apiChannelThumbnail,
   APP_VERSION: appVersion,
   AZURE_APP_ID: azureAppId,
-  BRAND_NAME: brandName,
   CHATWOOT_INBOX_TOKEN: chatwootInboxToken,
   CREATE_NEW_ACCOUNT_FROM_DASHBOARD: createNewAccountFromDashboard,
   DIRECT_UPLOADS_ENABLED: directUploadsEnabled,
@@ -14,17 +13,21 @@ const {
   GIT_SHA: gitSha,
   MAXIMUM_FILE_UPLOAD_SIZE: maximumFileUploadSize,
   HCAPTCHA_SITE_KEY: hCaptchaSiteKey,
-  INSTALLATION_NAME: installationName,
-  LOGO_THUMBNAIL: logoThumbnail,
-  LOGO: logo,
-  LOGO_DARK: logoDark,
-  PRIVACY_URL: privacyURL,
   IS_ENTERPRISE: isEnterprise,
-  TERMS_URL: termsURL,
-  WIDGET_BRAND_URL: widgetBrandURL,
   DISABLE_USER_PROFILE_UPDATE: disableUserProfileUpdate,
   DEPLOYMENT_ENV: deploymentEnv,
 } = window.globalConfig || {};
+
+// Branding & Legal values (Updated to fetch from .env as fallback)
+const brandName = 'Brand Name' || import.meta.env.VITE_BRAND_NAME;
+const logoThumbnail = import.meta.env.VITE_BRAND_LOGO_THUMBNAIL;
+const widgetBrandURL = import.meta.env.VITE_BRAND_URL;
+const installationName = import.meta.env.VITE_BRAND_NAME;
+const apiChannelThumbnail = import.meta.env.VITE_BRAND_LOGO_THUMBNAIL;
+const logo = import.meta.env.VITE_BRAND_LOGO_THUMBNAIL_LARGE;
+const logoDark = import.meta.env.VITE_BRAND_LOGO_THUMBNAIL_LARGE;
+const privacyURL = import.meta.env.VITE_PRIVACY_URL;
+const termsURL = import.meta.env.VITE_TERMS_URL;
 
 const state = {
   apiChannelName,
@@ -59,7 +62,6 @@ export const getters = {
 };
 
 export const actions = {};
-
 export const mutations = {};
 
 export default {

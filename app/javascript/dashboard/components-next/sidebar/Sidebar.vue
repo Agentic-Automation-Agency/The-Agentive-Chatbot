@@ -160,7 +160,7 @@ useEventListener(document, 'touchend', onResizeEnd);
 const inboxes = useMapGetter('inboxes/getInboxes');
 const labels = useMapGetter('labels/getLabelsOnSidebar');
 const teams = useMapGetter('teams/getMyTeams');
-const contactCustomViews = useMapGetter('customViews/getContactCustomViews');
+// const contactCustomViews = useMapGetter('customViews/getContactCustomViews');
 const conversationCustomViews = useMapGetter(
   'customViews/getConversationCustomViews'
 );
@@ -449,25 +449,25 @@ const menuItems = computed(() => {
     //     },
     //   ],
     // },
-    {
-      name: 'Vapi Voice Calls',
-      label: t('SIDEBAR.VAPI.TITLE'),
-      icon: 'i-lucide-phone',
-      children: [
-        {
-          name: 'Call Logs',
-          label: t('SIDEBAR.VAPI.CALL_LOGS'),
-          to: accountScopedRoute('vapi_call_logs'),
-          activeOn: ['vapi_call_logs'],
-        },
-        {
-          name: 'Call Stats',
-          label: t('SIDEBAR.VAPI.CALL_STATS'),
-          to: accountScopedRoute('vapi_call_stats'),
-          activeOn: ['vapi_call_stats'],
-        },
-      ],
-    },
+    // {
+    //   name: 'Vapi Voice Calls',
+    //   label: t('SIDEBAR.VAPI.TITLE'),
+    //   icon: 'i-lucide-phone',
+    //   children: [
+    //     {
+    //       name: 'Call Logs',
+    //       label: t('SIDEBAR.VAPI.CALL_LOGS'),
+    //       to: accountScopedRoute('vapi_call_logs'),
+    //       activeOn: ['vapi_call_logs'],
+    //     },
+    //     {
+    //       name: 'Call Stats',
+    //       label: t('SIDEBAR.VAPI.CALL_STATS'),
+    //       to: accountScopedRoute('vapi_call_stats'),
+    //       activeOn: ['vapi_call_stats'],
+    //     },
+    //   ],
+    // },
     {
       name: 'Companies',
       label: t('SIDEBAR.COMPANIES'),
