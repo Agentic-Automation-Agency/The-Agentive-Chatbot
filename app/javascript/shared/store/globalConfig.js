@@ -22,7 +22,7 @@ const {
 const brandName = 'Brand Name' || import.meta.env.VITE_BRAND_NAME;
 const logoThumbnail = import.meta.env.VITE_BRAND_LOGO_THUMBNAIL;
 const widgetBrandURL = import.meta.env.VITE_BRAND_URL;
-const installationName = import.meta.env.VITE_BRAND_NAME;
+const installationName = 'HELLO';
 const apiChannelThumbnail = import.meta.env.VITE_BRAND_LOGO_THUMBNAIL;
 const logo = import.meta.env.VITE_BRAND_LOGO_THUMBNAIL_LARGE;
 const logoDark = import.meta.env.VITE_BRAND_LOGO_THUMBNAIL_LARGE;

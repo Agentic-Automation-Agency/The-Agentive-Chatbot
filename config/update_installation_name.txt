@@ -1,0 +1,9 @@
+rails c
+InstallationConfig.find_by(name: "INSTALLATION_NAME").value
+
+config = InstallationConfig.find_by(name: "INSTALLATION_NAME")
+config.update!(value: "Your New Installation Name")
+
+InstallationConfig.find_by(name: "INSTALLATION_NAME").value
+
+GlobalConfig.clear_cache
