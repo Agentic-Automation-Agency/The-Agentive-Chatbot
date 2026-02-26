@@ -7,3 +7,10 @@ config.update!(value: "Your New Installation Name")
 InstallationConfig.find_by(name: "INSTALLATION_NAME").value
 
 GlobalConfig.clear_cache
+
+
+WHEN CHANGED THE installation_config.yml
+WE WILL NEED TO RUN THIS
+
+ConfigLoader.new.process
+GlobalConfig.clear_cache
