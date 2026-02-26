@@ -66,9 +66,7 @@ export default {
       hotKeys: [
         {
           key: 'enter',
-          title: this.$t(
-            'PROFILE_SETTINGS.FORM.SEND_MESSAGE.CARD.ENTER_KEY.HEADING'
-          ),
+          title: this.$t(),
           description: this.$t(
             'PROFILE_SETTINGS.FORM.SEND_MESSAGE.CARD.ENTER_KEY.CONTENT'
           ),

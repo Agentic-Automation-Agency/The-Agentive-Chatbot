@@ -1,4 +1,3 @@
-
 <script>
 // utils and composables
 import { login } from '../../api/auth';
@@ -78,7 +77,7 @@ export default {
   },
   computed: {
     ...mapGetters({ globalConfig: 'globalConfig/get' }),
-    
+
     // --- ENV OVERRIDES ---
     brandLogo() {
       // Returns the ENV logo if it exists, otherwise falls back to globalConfig logo
@@ -156,7 +155,9 @@ export default {
       this.loginApi.showLoading = true;
 
       const credentials = {
-        email: this.email ? decodeURIComponent(this.email) : this.credentials.email,
+        email: this.email
+          ? decodeURIComponent(this.email)
+          : this.credentials.email,
         password: this.credentials.password,
         sso_auth_token: this.ssoAuthToken,
         ssoAccountId: this.ssoAccountId,
@@ -179,7 +180,9 @@ export default {
             window.location = '/app/login';
           }
           this.loginApi.hasErrored = true;
-          this.showAlertMessage(response?.message || this.$t('LOGIN.API.UNAUTH'));
+          this.showAlertMessage(
+            response?.message || this.$t('LOGIN.API.UNAUTH')
+          );
         });
     },
     submitFormLogin() {
@@ -208,12 +211,13 @@ export default {
   >
     <section class="max-w-5xl mx-auto">
       <!-- UPDATED: Display logo from ENV -->
-      <img
+      <!-- <img
         :src="brandLogo"
         :alt="globalConfig.installationName"
         class="block w-auto h-12 mx-auto"
       />
-      
+       -->
+
       <!-- UPDATED: Display title from ENV -->
       <h2 class="mt-6 text-3xl font-medium text-center text-n-slate-12">
         {{ brandLoginTitle }}

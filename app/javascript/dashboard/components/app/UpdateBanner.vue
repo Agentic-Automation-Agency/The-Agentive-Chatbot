@@ -68,7 +68,7 @@ export default {
 </script>
 
 <!-- eslint-disable-next-line vue/no-root-v-if -->
-<template>
+<!-- <template>
   <Banner
     v-if="shouldShowBanner"
     color-scheme="primary"
@@ -78,4 +78,4 @@ export default {
     has-close-button
     @close="dismissUpdateBanner"
   />
-</template>
+</template> -->
