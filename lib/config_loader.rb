@@ -1,7 +1,7 @@
 class ConfigLoader
   DEFAULT_OPTIONS = {
     config_path: nil,
-    reconcile_only_new: true
+    reconcile_only_new: false
   }.freeze
 
   def process(options = {})

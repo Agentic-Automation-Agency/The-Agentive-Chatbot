@@ -88,7 +88,7 @@ onMounted(() => {
       <BaseSettingsHeader
         :title="t('AGENT_BOTS.HEADER')"
         :description="t('AGENT_BOTS.DESCRIPTION')"
-        :link-text="t('AGENT_BOTS.LEARN_MORE')"
+        
         feature-name="agent_bots"
       >
         <template #actions>
@@ -189,3 +189,18 @@ onMounted(() => {
     />
   </SettingsLayout>
 </template>
+
+      <!-- <BaseSettingsHeader
+        :title="t('AGENT_BOTS.HEADER')"
+        :description="t('AGENT_BOTS.DESCRIPTION')"
+        :link-text="t('AGENT_BOTS.LEARN_MORE')"
+        feature-name="agent_bots"
+      >
+        <template #actions>
+          <Button
+            icon="i-lucide-circle-plus"
+            :label="$t('AGENT_BOTS.ADD.TITLE')"
+            @click="openAddModal"
+          />
+        </template>
+      </BaseSettingsHeader> -->

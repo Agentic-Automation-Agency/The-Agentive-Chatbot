@@ -1,22 +1,22 @@
 # ------- Branding Related Config ------- #
 - name: INSTALLATION_NAME
-  value: 'Chatwoot'
+  value: 'The Agentive'
 - name: LOGO_THUMBNAIL
   value: '/brand-assets/logo_thumbnail.svg'
 - name: LOGO
-  value: '/brand-assets/logo.svg'
+  value: '/brand-assets/logo_thumbnail.svg'
 - name: LOGO_DARK
-  value: '/brand-assets/logo_dark.svg'
+  value: '/brand-assets/logo_thumbnail.svg'
 - name: BRAND_URL
-  value: 'https://www.chatwoot.com'
+  value: 'https://theagentive.ai/'
 - name: WIDGET_BRAND_URL
-  value: 'https://www.chatwoot.com'
+  value: 'https://theagentive.ai/'
 - name: BRAND_NAME
-  value: 'Chatwoot'
+  value: 'The Agentive'
 - name: TERMS_URL
-  value: 'https://www.chatwoot.com/terms-of-service'
+  value: 'https://theagentive.ai/'
 - name: PRIVACY_URL
-  value: 'https://www.chatwoot.com/privacy-policy'
+  value: 'https://theagentive.ai/'
 - name: DISPLAY_MANIFEST
   value: true
 # ------- End of Branding Related Config ------- #

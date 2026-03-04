@@ -12,6 +12,7 @@ import { routes as captainRoutes } from './captain/captain.routes';
 import AppContainer from './Dashboard.vue';
 import Suspended from './suspended/Index.vue';
 import NoAccounts from './noAccounts/Index.vue';
+import { routes as vapiRoutes } from './vapi/vapi.routes';
 
 export default {
   routes: [
@@ -19,6 +20,7 @@ export default {
       path: frontendURL('accounts/:accountId'),
       component: AppContainer,
       children: [
+        ...vapiRoutes,
         ...captainRoutes,
         ...inboxRoutes,
         ...conversation.routes,

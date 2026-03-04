@@ -146,7 +146,7 @@ const confirmDeletion = () => {
       <BaseSettingsHeader
         :title="$t('AGENT_MGMT.HEADER')"
         :description="$t('AGENT_MGMT.DESCRIPTION')"
-        :link-text="$t('AGENT_MGMT.LEARN_MORE')"
+        
         feature-name="agents"
       >
         <template #actions>

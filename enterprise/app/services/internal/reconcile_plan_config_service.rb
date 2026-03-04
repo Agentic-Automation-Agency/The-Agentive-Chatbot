@@ -1,5 +1,9 @@
 class Internal::ReconcilePlanConfigService
   def perform
+    # We are disabling this service to prevent it from automatically reverting 
+    # custom branding and configuration back to defaults.
+    return 
+
     remove_premium_config_reset_warning
     return if ChatwootHub.pricing_plan != 'community'
 
