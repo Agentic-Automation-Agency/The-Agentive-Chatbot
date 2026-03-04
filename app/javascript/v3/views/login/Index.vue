@@ -7,7 +7,6 @@ import { required, email } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import { SESSION_STORAGE_KEYS } from 'dashboard/constants/sessionStorage';
 import SessionStorage from 'shared/helpers/sessionStorage';
-import { useBranding } from 'shared/composables/useBranding';
 
 // components
 import SimpleDivider from '../../components/Divider/SimpleDivider.vue';
@@ -45,9 +44,7 @@ export default {
     authError: { type: String, default: '' },
   },
   setup() {
-    const { replaceInstallationName } = useBranding();
     return {
-      replaceInstallationName,
       v$: useVuelidate(),
     };
   },
@@ -77,15 +74,13 @@ export default {
   },
   computed: {
     ...mapGetters({ globalConfig: 'globalConfig/get' }),
-
+    
     // --- ENV OVERRIDES ---
     brandLogo() {
-      // Returns the ENV logo if it exists, otherwise falls back to globalConfig logo
       return import.meta.env.VITE_BRAND_LOGO_THUMBNAIL_LARGE;
     },
     brandLoginTitle() {
-      // Returns the ENV title if it exists, otherwise falls back to translated title
-      return import.meta.env.VITE_LOGIN_TITLE || 'Please Login!';
+      return import.meta.env.VITE_LOGIN_TITLE;
     },
     // ---------------------
 
@@ -155,9 +150,7 @@ export default {
       this.loginApi.showLoading = true;
 
       const credentials = {
-        email: this.email
-          ? decodeURIComponent(this.email)
-          : this.credentials.email,
+        email: this.email ? decodeURIComponent(this.email) : this.credentials.email,
         password: this.credentials.password,
         sso_auth_token: this.ssoAuthToken,
         ssoAccountId: this.ssoAccountId,
@@ -180,9 +173,7 @@ export default {
             window.location = '/app/login';
           }
           this.loginApi.hasErrored = true;
-          this.showAlertMessage(
-            response?.message || this.$t('LOGIN.API.UNAUTH')
-          );
+          this.showAlertMessage(response?.message || this.$t('LOGIN.API.UNAUTH'));
         });
     },
     submitFormLogin() {
@@ -211,13 +202,12 @@ export default {
   >
     <section class="max-w-5xl mx-auto">
       <!-- UPDATED: Display logo from ENV -->
-      <!-- <img
+      <img
         :src="brandLogo"
-        :alt="globalConfig.installationName"
+        :alt="brandLoginTitle"
         class="block w-auto h-12 mx-auto"
       />
-       -->
-
+      
       <!-- UPDATED: Display title from ENV -->
       <h2 class="mt-6 text-3xl font-medium text-center text-n-slate-12">
         {{ brandLoginTitle }}
