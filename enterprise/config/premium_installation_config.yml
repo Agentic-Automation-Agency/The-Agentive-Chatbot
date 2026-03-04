@@ -1,6 +1,6 @@
 # ------- Branding Related Config ------- #
 - name: INSTALLATION_NAME
-  value: 'Chatwoot'
+  value: 'The Agentive'
 - name: LOGO_THUMBNAIL
   value: '/brand-assets/logo_thumbnail.svg'
 - name: LOGO
@@ -12,7 +12,7 @@
 - name: WIDGET_BRAND_URL
   value: 'https://theagentive.ai/'
 - name: BRAND_NAME
-  value: 'Chatwoot'
+  value: 'The Agentive'
 - name: TERMS_URL
   value: 'https://theagentive.ai/'
 - name: PRIVACY_URL
